@@ -51,9 +51,7 @@ open class MIDIInstrument: Node, MIDIListener, NamedNode {
                 var p = packetPtr
                 for _ in 1...packetList.pointee.numPackets {
                     for event in p.pointee {
-                        DispatchQueue.main.async {
-                            self.handle(event: event)
-                        }
+                        self.handle(event: event)
                     }
                     p = UnsafePointer<MIDIPacket>(MIDIPacketNext(p))
                 }
